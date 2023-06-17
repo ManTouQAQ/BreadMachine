@@ -1,0 +1,6 @@
+name: BreadMachine
+version: ${project.version}
+authors:
+  - ManTou
+api-version: 0.49.0
+main: me.mantou.breadmachine.kook.BreadMachine
