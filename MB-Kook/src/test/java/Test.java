@@ -5,13 +5,26 @@ import com.google.inject.spi.ProvisionListener;
 import lombok.Data;
 import lombok.SneakyThrows;
 import me.mantou.breadmachine.kook.service.impl.LocalVoicePlayService;
+import me.mantou.breadmachine.kook.util.str.resolver.StringArgsResolver;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class Test {
-    @SneakyThrows
     public static void main(String[] args) {
+        StringArgsResolver argsResolver = new StringArgsResolver("1", "test");
+
+        System.out.println(argsResolver.getResult("{{0}}.to.get"));
+
+        Yaml yaml = new Yaml();
+
+
+
+    }
+
+    @SneakyThrows
+    public static void main2(String[] args) {
         LocalVoicePlayService.FFmpegZMQService zmqService = new LocalVoicePlayService.FFmpegZMQService("D:\\ffmpeg.exe");
         zmqService.start("rtp://82.157.157.240:35044?rtcpport=40257");
         for (int i = 0; i < 10; i++) {

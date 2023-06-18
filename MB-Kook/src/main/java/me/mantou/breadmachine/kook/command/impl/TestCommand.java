@@ -14,14 +14,6 @@ import snw.jkook.entity.User;
 @CmdOpt(helpMsg = "发送私聊消息给指定的用户", descMsg = "发送私聊消息")
 @BMProperties(prefix = "msg", properties = {"test.yml"})
 public class TestCommand{
-    @BMValue("${root:123}")
-    private String rootMsg;
-
-    @CmdMethod
-    public void rootTest(){
-        System.out.println(rootMsg);
-    }
-
     @CmdMethod("send <message> [target]")
     @ParamOpt(key = "target", type = User.class)
     public void sendTempMessageToUser(CSender sender,

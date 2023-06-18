@@ -22,6 +22,11 @@ public class BMValueMembersInjector<T> implements MembersInjector<T> {
         BMValueResourceResolver resolver = new BMValueResourceResolver(instance.getClass());
         BMValue fieldAnnotation = field.getAnnotation(BMValue.class);
         String result = resolver.getResult(fieldAnnotation.value());
+        if (!field.getType().isAssignableFrom(result.getClass())) {
+            log.warn("{}无法进行属性({})的注入，因为类型无法转换 result={}", instance.getClass().getSimpleName(), field.getName(), result);
+            return;
+        }
+
         field.set(instance, result);
         log.debug("{}注入属性 {} 的值为 {}", instance.getClass().getSimpleName(), field.getName(), result);
     }
