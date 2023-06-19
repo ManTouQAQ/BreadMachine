@@ -18,10 +18,16 @@ public class BreadMachineService {
     @Inject
     private AutoRegister autoRegister;
 
+    private BreadMachineService(){
+    }
+
     private <T extends BasePlugin> void init(T instance){
         BreadMachineService.instance = instance;
         injector = Guice.createInjector(new BMAutoScanModule(this, instance,
                 new AutoScanConfig(this.getClass(), instance.getClass())));
+    }
+
+    public void scanAndRegister(){
         autoRegister.scanAndRegister(injector);
     }
 

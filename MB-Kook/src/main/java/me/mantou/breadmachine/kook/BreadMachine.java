@@ -18,8 +18,14 @@ public class BreadMachine extends BasePlugin {
     }
 
     @Override
-    public void onEnable() {
+    public void onLoad() {
         machineService = BreadMachineService.start(this);
+    }
+
+    @Override
+    public void onEnable() {
+        machineService.scanAndRegister();
+
         log.info("{}-{}已启动", getDescription().getName(), getDescription().getVersion());
     }
 

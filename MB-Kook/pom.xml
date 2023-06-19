@@ -30,18 +30,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.4.1</version>
-                <configuration>
-                    <createDependencyReducedPom>false</createDependencyReducedPom>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <resources>
@@ -52,27 +40,14 @@
         </resources>
     </build>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
+
 
     <dependencies>
         <dependency>
             <groupId>com.github.SNWCreations</groupId>
             <artifactId>KookBC</artifactId>
-            <version>0.27.1</version>
             <scope>provided</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.github.SNWCreations</groupId>-->
-<!--            <artifactId>JKook</artifactId>-->
-<!--            <version>0.49.0</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>me.mantou</groupId>
             <artifactId>MB-Core</artifactId>
