@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>MB-Kook</artifactId>
+    <artifactId>MB-Core</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,14 +19,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <outputDirectory>D:\JKook\plugins</outputDirectory>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -61,24 +53,32 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.github.classgraph</groupId>
+            <artifactId>classgraph</artifactId>
+            <version>4.8.149</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>5.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jetbrains/annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>23.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.SNWCreations</groupId>
             <artifactId>KookBC</artifactId>
             <version>0.27.1</version>
             <scope>provided</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.github.SNWCreations</groupId>-->
-<!--            <artifactId>JKook</artifactId>-->
-<!--            <version>0.49.0</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-        <dependency>
-            <groupId>me.mantou</groupId>
-            <artifactId>MB-Core</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
-
 </project>

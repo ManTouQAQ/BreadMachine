@@ -5,12 +5,12 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import me.mantou.breadmachine.kook.config.BMConfig;
-import me.mantou.breadmachine.kook.ioc.annotation.Component;
-import me.mantou.breadmachine.kook.ioc.annotation.PostConstruct;
+import me.mantou.breadmachine.core.config.BMConfig;
+import me.mantou.breadmachine.core.ioc.annotation.Component;
+import me.mantou.breadmachine.core.ioc.annotation.PostConstruct;
 import me.mantou.breadmachine.kook.model.ResultData;
 import me.mantou.breadmachine.kook.service.VoicePlayService;
-import me.mantou.breadmachine.kook.util.kookvoice.VoiceConnector;
+import me.mantou.breadmachine.core.util.kookvoice.VoiceConnector;
 import snw.jkook.entity.channel.VoiceChannel;
 
 import java.io.File;

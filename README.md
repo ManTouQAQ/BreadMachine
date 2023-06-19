@@ -21,3 +21,13 @@
 * 更加方便的CardButtonClick事件监听
 * 一些基于IOC的特性如自动注入配置文件的obj，init方法
 * etc...
+
+### TODO
+***
+* 聊天过滤器
+* 图片搜索（看图找番）
+* GitHub Hook
+* 直播(视频)推送
+* RSS订阅提示
+* 临时频道创建
+* etc...

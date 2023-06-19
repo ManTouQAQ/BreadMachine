@@ -5,7 +5,7 @@ import com.google.inject.spi.ProvisionListener;
 import lombok.Data;
 import lombok.SneakyThrows;
 import me.mantou.breadmachine.kook.service.impl.LocalVoicePlayService;
-import me.mantou.breadmachine.kook.util.str.resolver.StringArgsResolver;
+import me.mantou.breadmachine.core.util.str.resolver.StringArgsResolver;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
