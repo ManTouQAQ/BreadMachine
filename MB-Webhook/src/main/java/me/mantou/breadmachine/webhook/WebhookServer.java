@@ -39,9 +39,14 @@ public class WebhookServer {
                 exchange.sendResponseHeaders(405, -1);
                 return;
             }
-            h.handleExchange(exchange, parseRequestParams(exchange.getRequestURI().getQuery()), h.doParser(exchange.getRequestBody()));
+            try {
+                h.handleExchange(exchange, parseRequestParams(exchange.getRequestURI().getQuery()), h.doParser(exchange.getRequestBody()));
+            } catch (Exception e) {
+                h.handleException(e);
+            }
             if (exchange.getResponseCode() == -1) {
                 exchange.sendResponseHeaders(200, -1);
+                log.debug("未设置响应代码 自动补全200");
             }
         }));
         httpServer.setExecutor(command -> {

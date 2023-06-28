@@ -19,7 +19,11 @@ public abstract class ContextHandler<T> {
         return this;
     }
 
-    public abstract void handleExchange(HttpExchange exchange, Map<String, String> requestParams, T payload);
+    public abstract void handleExchange(HttpExchange exchange, Map<String, String> requestParams, T payload) throws Exception;
+
+    public void handleException(Exception e){
+        e.printStackTrace();
+    }
 
     protected T doParser(InputStream inputStream){
         Object payload = inputStream;
