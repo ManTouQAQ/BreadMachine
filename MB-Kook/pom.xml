@@ -50,6 +50,12 @@
         </dependency>
         <dependency>
             <groupId>me.mantou</groupId>
+            <artifactId>MB-Webhook</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.mantou</groupId>
             <artifactId>MB-Core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>

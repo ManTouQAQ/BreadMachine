@@ -1,18 +1,25 @@
+
 import com.google.inject.*;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Named;
 import com.google.inject.spi.ProvisionListener;
+import com.sun.net.httpserver.HttpExchange;
 import lombok.Data;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import me.mantou.breadmachine.kook.service.impl.LocalVoicePlayService;
 import me.mantou.breadmachine.core.util.str.resolver.StringArgsResolver;
+import me.mantou.breadmachine.webhook.ContextHandler;
+import me.mantou.breadmachine.webhook.Stream2StringParser;
+import me.mantou.breadmachine.webhook.WebhookServer;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class Test {
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         StringArgsResolver argsResolver = new StringArgsResolver("1", "test");
 
         System.out.println(argsResolver.getResult("{{0}}.to.get"));

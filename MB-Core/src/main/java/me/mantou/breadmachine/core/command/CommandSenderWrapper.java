@@ -2,6 +2,7 @@ package me.mantou.breadmachine.core.command;
 
 import lombok.Data;
 import snw.jkook.command.ConsoleCommandSender;
+import snw.jkook.entity.Guild;
 import snw.jkook.entity.User;
 import snw.jkook.entity.channel.VoiceChannel;
 import snw.jkook.message.Message;
@@ -14,12 +15,27 @@ import java.util.Collection;
 
 @Data
 public class CommandSenderWrapper implements CSender {
+    private static final String CONSOLE_NAME = "控制台";
     private final snw.jkook.command.CommandSender jKookSender;
     private final Message message;
 
     @Override
     public void sendTempMessage(String msg, Object... params) {
         sendTempMessage(String.format(msg, params));
+    }
+
+    @Override
+    public String getName() {
+        return getName(null);
+    }
+
+    @Override
+    public String getName(Guild guild) {
+        if (jKookSender instanceof ConsoleCommandSender) return CONSOLE_NAME;
+
+        User sender = (User) jKookSender;
+        if (guild == null) return sender.getName();
+        return sender.getNickName(guild);
     }
 
     @Override
