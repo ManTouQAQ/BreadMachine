@@ -1,13 +1,15 @@
 package me.mantou.breadmachine.core.util.timer;
 
-import com.google.inject.Inject;
-import me.mantou.breadmachine.core.ioc.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import snw.jkook.plugin.Plugin;
 import snw.jkook.scheduler.Task;
 
+import javax.annotation.Resource;
+
 @Component
 public class BMTaskRunnerImpl implements BMTaskRunner{
-    @Inject
+    @Autowired
     private Plugin plugin;
 
     @Override

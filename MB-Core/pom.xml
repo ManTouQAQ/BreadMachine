@@ -34,13 +34,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.classgraph</groupId>
-            <artifactId>classgraph</artifactId>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
             <scope>compile</scope>
         </dependency>
         <dependency>

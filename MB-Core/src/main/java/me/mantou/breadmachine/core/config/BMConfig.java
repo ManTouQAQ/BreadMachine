@@ -1,28 +1,28 @@
 package me.mantou.breadmachine.core.config;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
 import lombok.Getter;
-import me.mantou.breadmachine.core.ioc.annotation.BMProperties;
-import me.mantou.breadmachine.core.ioc.annotation.BMValue;
-import me.mantou.breadmachine.core.ioc.annotation.Configuration;
+import me.mantou.breadmachine.core.util.spring.YamlPropertySourceFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import snw.jkook.Core;
 import snw.jkook.HttpAPI;
 import snw.jkook.JKook;
 
 @Configuration
 @Getter
-@BMProperties(properties = "../../kbc.yml")
-public class BMConfig extends AbstractModule {
-    @BMValue("${token}")
+@PropertySource(value = "file:kbc.yml", factory = YamlPropertySourceFactory.class)
+public class BMConfig {
+    @Value("${token}")
     private String botToken;
 
-    @Provides
+    @Bean
     public Core core(){
         return JKook.getCore();
     }
 
-    @Provides
+    @Bean
     public HttpAPI httpAPI(){
         return JKook.getHttpAPI();
     }

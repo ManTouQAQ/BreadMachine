@@ -1,11 +1,11 @@
 package me.mantou.breadmachine.core.command;
 
-import com.google.inject.Inject;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import me.mantou.breadmachine.core.command.annotation.BotCommand;
 import me.mantou.breadmachine.core.command.wrapper.node.CommandWrapper;
-import me.mantou.breadmachine.core.ioc.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import snw.jkook.plugin.Plugin;
 
 import java.util.LinkedList;
@@ -17,7 +17,7 @@ public class CommandRegister {
     @Getter
     private final List<CommandWrapper> COMMAND_WRAPPERS = new LinkedList<>();
 
-    @Inject
+    @Autowired
     private Plugin plugin;
 
     public CommandWrapper registerCommand(Object command){

@@ -1,35 +1,39 @@
 package me.mantou.breadmachine.core.util.bm;
 
-import com.google.inject.Binding;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
 import lombok.extern.slf4j.Slf4j;
 import me.mantou.breadmachine.core.command.CommandRegister;
 import me.mantou.breadmachine.core.command.annotation.BotCommand;
 import me.mantou.breadmachine.core.command.wrapper.node.CommandWrapper;
-import me.mantou.breadmachine.core.ioc.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 import snw.jkook.event.Listener;
 import snw.jkook.plugin.Plugin;
+
+import javax.annotation.Resource;
+import java.util.Collection;
 
 @Component
 @Slf4j
 public class AutoRegister {
-    @Inject
+    @Autowired
     private Plugin plugin;
-    @Inject
+    @Autowired
     private CommandRegister commandRegister;
-    public void scanAndRegister(Injector injector){
-        for (Binding<?> value : injector.getBindings().values()) {
-            Class<?> type = value.getKey().getTypeLiteral().getRawType();
-            if (type.isAnnotationPresent(BotCommand.class)){
-                CommandWrapper wrapper = commandRegister.registerCommand(value.getProvider().get());
-                if (wrapper != null) log.debug("[自动注册] 命令{}{}成功注册-{}", wrapper.getPrefix(), wrapper.getRootValue(), type.getSimpleName());
-            }
+    @Autowired
+    private ApplicationContext applicationContext;
 
-            if (Listener.class.isAssignableFrom(type)){
-                plugin.getCore().getEventManager().registerHandlers(plugin, (Listener) value.getProvider().get());
-                log.debug("[自动注册] 监听器{}成功注册", type.getSimpleName());
-            }
-        }
+    public void scanAndRegister(){
+        Collection<Object> botCommands = applicationContext.getBeansWithAnnotation(BotCommand.class).values();
+        botCommands.forEach(o -> {
+            CommandWrapper wrapper = commandRegister.registerCommand(o);
+            if (wrapper != null) log.debug("[自动注册] 命令{}{}成功注册-{}", wrapper.getPrefix(), wrapper.getRootValue(), o.getClass().getSimpleName());
+        });
+
+        Collection<Listener> eventListeners = applicationContext.getBeansOfType(Listener.class).values();
+        eventListeners.forEach(l -> {
+            plugin.getCore().getEventManager().registerHandlers(plugin, l);
+            log.debug("[自动注册] 监听器{}成功注册", l.getClass().getSimpleName());
+        });
     }
 }

@@ -5,7 +5,6 @@ import snw.jkook.scheduler.Task;
 import java.time.Duration;
 
 public abstract class Countdown implements Runnable {
-
     protected final Integer maxTime;
     protected Duration period = Duration.ofSeconds(1);
     protected int timeLeft;

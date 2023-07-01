@@ -10,21 +10,13 @@ public class BreadMachine extends BasePlugin {
     @Getter
     private static BreadMachine instance;
 
-    @Getter
-    private BreadMachineService machineService;
-
     public BreadMachine(){
         instance = this;
     }
 
     @Override
-    public void onLoad() {
-        machineService = BreadMachineService.start(this);
-    }
-
-    @Override
     public void onEnable() {
-        machineService.scanAndRegister();
+        BreadMachineService.start(this);
 
         log.info("{}-{}已启动", getDescription().getName(), getDescription().getVersion());
     }

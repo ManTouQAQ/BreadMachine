@@ -1,9 +1,9 @@
 package me.mantou.breadmachine.kook.command;
 
-import com.google.inject.Inject;
 import me.mantou.breadmachine.core.command.CSender;
 import me.mantou.breadmachine.core.command.annotation.BotCommand;
 import me.mantou.breadmachine.core.command.annotation.CmdMethod;
+import org.springframework.beans.factory.annotation.Autowired;
 import snw.jkook.Core;
 import snw.jkook.HttpAPI;
 import snw.jkook.entity.Guild;
@@ -16,12 +16,13 @@ import snw.jkook.message.component.card.module.SectionModule;
 import snw.jkook.util.PageIterator;
 
 import java.util.Collection;
+
 @BotCommand(rootCmd = "binfo")
 public class BotInfoCommand {
-    @Inject
+    @Autowired
     private HttpAPI httpAPI;
 
-    @Inject
+    @Autowired
     private Core core;
 
     @CmdMethod

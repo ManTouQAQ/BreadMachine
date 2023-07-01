@@ -40,8 +40,6 @@
         </resources>
     </build>
 
-
-
     <dependencies>
         <dependency>
             <groupId>com.github.SNWCreations</groupId>

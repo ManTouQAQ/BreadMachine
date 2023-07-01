@@ -1,12 +1,12 @@
 package me.mantou.breadmachine.kook.command;
 
-import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import me.mantou.breadmachine.core.util.card.BMCard;
 import me.mantou.breadmachine.core.command.annotation.BotCommand;
 import me.mantou.breadmachine.core.command.annotation.CmdMethod;
 import me.mantou.breadmachine.core.command.annotation.CmdOpt;
-import me.mantou.breadmachine.core.ioc.annotation.PostConstruct;
+import me.mantou.breadmachine.kook.service.VoicePlayService;
+import org.springframework.beans.factory.annotation.Autowired;
 import snw.jkook.entity.User;
 import snw.jkook.entity.channel.TextChannel;
 import snw.jkook.event.user.UserClickButtonEvent;
@@ -20,14 +20,15 @@ import snw.jkook.message.component.card.module.ActionGroupModule;
 import snw.jkook.message.component.card.module.HeaderModule;
 import snw.jkook.plugin.Plugin;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.util.List;
 
 @BotCommand(rootCmd = "card")
 @Slf4j
 public class CardCommand {
-    @Inject
+    @Autowired
     private Plugin plugin;
-
     private BMCard bmCard;
 
     @PostConstruct
@@ -60,6 +61,4 @@ public class CardCommand {
                 )).build();
         bmCard.setCard(component).sendTemp(user, channel);
     }
-
-
 }

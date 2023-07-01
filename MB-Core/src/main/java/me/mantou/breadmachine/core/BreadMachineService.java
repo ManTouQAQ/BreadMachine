@@ -1,39 +1,45 @@
 package me.mantou.breadmachine.core;
 
-import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import lombok.Getter;
-import me.mantou.breadmachine.core.ioc.module.AutoScanConfig;
-import me.mantou.breadmachine.core.ioc.module.BMAutoScanModule;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import me.mantou.breadmachine.core.util.bm.AutoRegister;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Service;
 import snw.jkook.plugin.BasePlugin;
-import snw.jkook.plugin.Plugin;
 
+@Service
+@Slf4j
 public class BreadMachineService {
-    @Getter
-    private static Plugin instance;
-    @Getter
-    private Injector injector;
-    @Inject
+
+    @Autowired
     private AutoRegister autoRegister;
 
-    private BreadMachineService(){
-    }
-
-    private <T extends BasePlugin> void init(T instance){
-        BreadMachineService.instance = instance;
-        injector = Guice.createInjector(new BMAutoScanModule(this, instance,
-                new AutoScanConfig(this.getClass(), instance.getClass())));
-    }
-
     public void scanAndRegister(){
-        autoRegister.scanAndRegister(injector);
+        autoRegister.scanAndRegister();
     }
 
     public static <T extends BasePlugin> BreadMachineService start(T instance){
-        BreadMachineService service = new BreadMachineService();
-        service.init(instance);
+        ApplicationContext applicationContext = init(instance);
+        BreadMachineService service = applicationContext.getBean(BreadMachineService.class);
+        log.info("面包机服务启动成功");
+        service.scanAndRegister();
+        log.info("面包机自动注册服务完成");
         return service;
+    }
+
+    @SneakyThrows
+    private static <T extends BasePlugin> ApplicationContext init(T instance){
+
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.setClassLoader(instance.getClass().getClassLoader());
+
+        context.getBeanFactory().registerSingleton(instance.getClass().getSimpleName(), instance);
+
+        context.scan(BreadMachineService.class.getPackageName(),
+                instance.getClass().getPackageName());
+        context.refresh();
+        return context;
     }
 }

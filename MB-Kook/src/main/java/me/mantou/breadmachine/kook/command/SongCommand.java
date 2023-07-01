@@ -1,6 +1,5 @@
 package me.mantou.breadmachine.kook.command;
 
-import com.google.inject.Inject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import me.mantou.breadmachine.core.command.CSender;
@@ -9,14 +8,17 @@ import me.mantou.breadmachine.core.command.annotation.CmdMethod;
 import me.mantou.breadmachine.core.command.annotation.CmdOpt;
 import me.mantou.breadmachine.core.command.annotation.CmdParam;
 import me.mantou.breadmachine.kook.service.VoicePlayService;
+import org.springframework.beans.factory.annotation.Autowired;
 import snw.jkook.entity.channel.VoiceChannel;
+
+import javax.annotation.Resource;
 
 @BotCommand(rootCmd = "song", alias = {"音乐"})
 @CmdOpt(helpMsg = "播放音乐", descMsg = "播放音乐")
 @Slf4j
 public class SongCommand{
 
-    @Inject
+    @Autowired
     private VoicePlayService voicePlayService;
 
     @CmdMethod("<type> <value>")

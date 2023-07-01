@@ -1,11 +1,13 @@
 package me.mantou.breadmachine.core.util.timer;
 
-import com.google.inject.Inject;
 import lombok.Getter;
-import me.mantou.breadmachine.core.ioc.annotation.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import snw.jkook.scheduler.Task;
 
-@Component(eager = true)
+import javax.annotation.Resource;
+
+@Component
 public class BMScheduler {
     @Getter
     private static BMTaskRunner bmTaskRunner;
@@ -22,7 +24,7 @@ public class BMScheduler {
         return bmTaskRunner.runTask(runnable);
     }
 
-    @Inject
+    @Resource
     private void setBmTaskRunner(BMTaskRunner bmTaskRunner) {
         BMScheduler.bmTaskRunner = bmTaskRunner;
     }

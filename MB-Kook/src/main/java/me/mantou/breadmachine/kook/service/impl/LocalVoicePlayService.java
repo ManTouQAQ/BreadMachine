@@ -1,30 +1,30 @@
 package me.mantou.breadmachine.kook.service.impl;
 
-import com.google.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import me.mantou.breadmachine.core.config.BMConfig;
-import me.mantou.breadmachine.core.ioc.annotation.Component;
-import me.mantou.breadmachine.core.ioc.annotation.PostConstruct;
 import me.mantou.breadmachine.kook.model.ResultData;
 import me.mantou.breadmachine.kook.service.VoicePlayService;
 import me.mantou.breadmachine.core.util.kookvoice.VoiceConnector;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import snw.jkook.entity.channel.VoiceChannel;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.FutureTask;
 
-@Component
+@Service
 @Slf4j
 public class LocalVoicePlayService implements VoicePlayService {
-    @Inject
+    @Autowired
     private BMConfig config;
     private static final String FFMPEG_PATH = "D:\\ffmpeg.exe";
-    private FFmpegZMQService zmqService = new FFmpegZMQService(FFMPEG_PATH);
+    private final FFmpegZMQService zmqService = new FFmpegZMQService(FFMPEG_PATH);
     private VoiceConnector connector;
 
     @PostConstruct
